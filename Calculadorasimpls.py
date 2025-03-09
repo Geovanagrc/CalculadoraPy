@@ -1,14 +1,17 @@
 import tkinter as tk
 from tkinter import *
 
-numeros = ["0","1","2","3","4","5","6","7","8","9"]
-ops = ["+","-","*","/"]
+teclado = ["0","1","2","3","4","5","6","7","8","9","+","-","*","/","="]
 
-def clicou (*args):
-    entrada.config(text = "1")
+def limpar():
+    return print("Em desenvolvimento")
+    
+def clicou (bot):
+    if bot in teclado:
+        entrada.config(text = bot)
 
 janela = tk.Tk()
-janela.geometry("300x400")
+janela.geometry("300x450")
 janela.title("Calculadora simples")
 janela.resizable(0,0)
 janela.iconbitmap("Calculadora.ico")
@@ -18,9 +21,21 @@ barra.place(x=0, y =0 )
 barra.config (height=60,width=300)
 
 entrada = Label(janela,text="Insira um número")
-entrada.place(x=0, y = 25)
+entrada.place(x = 0, y = 23)
 
-botao1 = Button(janela,text="1",command = clicou)
-botao1.place(x=0, y = 60)
+#Teclado numerico
+cordx = 0
+cordy = 90
+for x in teclado:
+    botao = Button(janela, text=x,width=5,height=3, command=lambda x=x: clicou(x))
+    botao.place(x = cordx,y = cordy)
+    cordx += 60
+    if cordx == 300:
+        cordx=0
+        cordy+=95
+
+#Botao limpar
+botao_limpar = Button(janela, text="Limpar", width=30, height=3,command=limpar)
+botao_limpar.place(x=0, y=375)
 
 janela.mainloop()
